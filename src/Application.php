@@ -76,6 +76,8 @@ class Application
         $router->addRoute('get', '/my/account/subscription', 'my/Subscription#redirect', 'subscription');
         $router->addRoute('post', '/my/account/subscription', 'my/Subscription#create', 'create subscription account');
 
+        $router->addRoute('get', '/my/data/import', 'my/Data#importation', 'importation');
+
         // News page
         $router->addRoute('get', '/news', 'NewsLinks#index', 'news');
         $router->addRoute('post', '/news', 'NewsLinks#fill', 'fill news');

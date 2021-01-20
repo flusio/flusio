@@ -115,6 +115,15 @@ class Dom
         }
     }
 
+    public function nodes()
+    {
+        if ($this->nodes_selected) {
+            return $this->nodes_selected;
+        } else {
+            return $this->dom;
+        }
+    }
+
     /**
      * Return a list of nodes corresponding to a xpath query
      *
