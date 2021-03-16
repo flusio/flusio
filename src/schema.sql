@@ -72,7 +72,13 @@ CREATE TABLE collections (
     description TEXT NOT NULL DEFAULT '',
     type TEXT NOT NULL,
     is_public BOOLEAN NOT NULL DEFAULT false,
-    user_id TEXT NOT NULL REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE
+    user_id TEXT NOT NULL REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE,
+
+    feed_url TEXT,
+    feed_site_url TEXT,
+    feed_fetched_code INTEGER NOT NULL DEFAULT 0,
+    feed_fetched_at TIMESTAMPTZ,
+    feed_fetched_error TEXT
 );
 
 CREATE INDEX idx_collections_user_id ON collections(user_id);
@@ -88,7 +94,9 @@ CREATE TABLE links (
     fetched_at TIMESTAMPTZ,
     fetched_code INTEGER NOT NULL DEFAULT 0,
     fetched_error TEXT,
-    user_id TEXT REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE
+    user_id TEXT REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE,
+
+    feed_entry_id TEXT
 );
 
 CREATE UNIQUE INDEX idx_links_user_id_url ON links(user_id, url);

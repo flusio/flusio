@@ -62,6 +62,10 @@ class Link extends \Minz\Model
             'required' => true,
         ],
 
+        'feed_entry_id' => [
+            'type' => 'string',
+        ],
+
         'number_comments' => [
             'type' => 'integer',
             'computed' => true,

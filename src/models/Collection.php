@@ -54,6 +54,26 @@ class Collection extends \Minz\Model
             'type' => 'integer',
             'computed' => true,
         ],
+
+        'feed_url' => [
+            'type' => 'string',
+        ],
+
+        'feed_site_url' => [
+            'type' => 'string',
+        ],
+
+        'feed_fetched_code' => [
+            'type' => 'integer',
+        ],
+
+        'feed_fetched_at' => [
+            'type' => 'datetime',
+        ],
+
+        'feed_error' => [
+            'type' => 'string',
+        ],
     ];
 
     /**
