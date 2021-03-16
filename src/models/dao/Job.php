@@ -89,6 +89,7 @@ class Job extends \Minz\DatabaseModel
         $perform_at = date_create_from_format(\Minz\Model::DATETIME_FORMAT, $db_job['perform_at']);
         $perform_at->modify($db_job['frequency']);
         $this->update($db_job['id'], [
+            'locked_at' => null,
             'perform_at' => $perform_at->format(\Minz\Model::DATETIME_FORMAT),
         ]);
     }

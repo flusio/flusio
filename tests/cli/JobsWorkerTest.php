@@ -271,6 +271,7 @@ class JobsWorkerTest extends \PHPUnit\Framework\TestCase
             \Minz\Time::fromNow(1, 'day')->getTimestamp(),
             $perform_at->getTimestamp(),
         );
+        $this->assertNull($db_job['locked_at']);
     }
 
     public function testRunReschedulesJobWithFrequencyEvenIfFailing()
@@ -299,6 +300,7 @@ class JobsWorkerTest extends \PHPUnit\Framework\TestCase
             \Minz\Time::fromNow(1, 'month')->getTimestamp(),
             $perform_at->getTimestamp(),
         );
+        $this->assertNull($db_job['locked_at']);
     }
 
     public function testRunReschedulesJobWithTooManyAttempts()
@@ -333,6 +335,7 @@ class JobsWorkerTest extends \PHPUnit\Framework\TestCase
             $perform_at->getTimestamp(),
         );
         $this->assertSame($number_attempts + 1, $db_job['number_attempts']);
+        $this->assertNull($db_job['locked_at']);
     }
 
     public function testWatchRendersCorrectly()
