@@ -11,6 +11,10 @@ your cron task if you had one.
 If you’ve set the subscription system, the sync cron task must be removed as
 well (a scheduled job is running every 4 hours).
 
+A new environment variable must be set in your `.env` file: `APP_SUPPORT_EMAIL`.
+It’s used to create a default user. Make sure to set it to a user that doesn’t
+exist since feeds are attached to it.
+
 ## 2021-02-23 - v0.17
 
 ### Breaking changes

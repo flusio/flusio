@@ -113,6 +113,8 @@ class User extends \Minz\Model
      * @param string $username
      * @param string $email
      * @param string $password
+     *
+     * @return \flusio\models\User
      */
     public static function init($username, $email, $password)
     {
@@ -120,6 +122,22 @@ class User extends \Minz\Model
             'username' => trim($username),
             'email' => utils\Email::sanitize($email),
             'password_hash' => $password ? password_hash($password, PASSWORD_BCRYPT) : '',
+        ]);
+    }
+
+    /**
+     * @return \flusio\models\User
+     */
+    public static function supportUser()
+    {
+        $support_email = \Minz\Configuration::$application['support_email'];
+        $default_password = \flusio\utils\Random::hex(128);
+        return self::findOrCreateBy([
+            'email' => utils\Email::sanitize($support_email),
+        ], [
+            'username' => 'flusio',
+            'password_hash' => password_hash($default_password, PASSWORD_BCRYPT),
+            'validated_at' => \Minz\Time::now(),
         ]);
     }
 

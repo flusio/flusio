@@ -2,6 +2,9 @@
 
 $environment = \Minz\Configuration::$environment;
 
+// Make sure to initiaze the support user
+\flusio\models\User::supportUser();
+
 if ($environment === 'development') {
     \flusio\models\Topic::findOrCreateBy(['label' => _('Business')]);
     \flusio\models\Topic::findOrCreateBy(['label' => _('Climate')]);

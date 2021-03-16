@@ -20,6 +20,7 @@ return [
     ],
 
     'application' => [
+        'support_email' => $dotenv->pop('APP_SUPPORT_EMAIL'),
         'brand' => $dotenv->pop('APP_BRAND', 'flusio'),
         'version' => trim(@file_get_contents($app_path . '/VERSION.txt')),
         'cache_path' => $dotenv->pop('APP_CACHE_PATH', $app_path . '/cache'),

@@ -28,6 +28,7 @@ return [
     ],
 
     'application' => [
+        'support_email' => $dotenv->pop('APP_SUPPORT_EMAIL'),
         'brand' => 'flusio',
         'version' => trim(@file_get_contents($app_path . '/VERSION.txt')),
         'tmp_path' => $temporary_directory,
