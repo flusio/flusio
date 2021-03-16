@@ -14,7 +14,7 @@ class Collection extends \Minz\Model
 {
     use DaoConnector;
 
-    public const VALID_TYPES = ['bookmarks', 'collection'];
+    public const VALID_TYPES = ['bookmarks', 'collection', 'feed'];
 
     public const PROPERTIES = [
         'id' => [
@@ -120,6 +120,23 @@ class Collection extends \Minz\Model
             'name' => _('Bookmarks'),
             'type' => 'bookmarks',
             'user_id' => $user_id,
+        ]);
+    }
+
+    /**
+     * @param string $user_id
+     *
+     * @return \flusio\models\Collection
+     */
+    public static function initFeed($user_id, $feed_url)
+    {
+        $feed_url = \SpiderBits\Url::sanitize($feed_url);
+        return new self([
+            'name' => $feed_url,
+            'feed_url' => $feed_url,
+            'type' => 'feed',
+            'user_id' => $user_id,
+            'is_public' => true,
         ]);
     }
 
