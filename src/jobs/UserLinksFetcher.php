@@ -33,7 +33,7 @@ class UserLinksFetcher extends Job
         }
 
         // we fetch the links and save them one by one
-        $fetch_service = new services\Fetch();
+        $fetch_service = new services\LinkFetcher();
         foreach ($links as $link) {
             $fetch_service->fetch($link);
             $link->save();

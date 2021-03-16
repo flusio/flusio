@@ -23,7 +23,7 @@ class Links
     {
         $number = $request->param('number', 10);
 
-        $fetch_service = new services\Fetch();
+        $fetch_service = new services\LinkFetcher();
         $image_service = new services\Image();
 
         $links = models\Link::daoToList('listByOldestFetching', $number);
