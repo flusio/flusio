@@ -177,9 +177,6 @@ class Link
         return Collection::find($this->via_resource_id);
     }
 
-    /**
-     * @return \flusio\models\User|null
-     */
     public function viaUser(): ?User
     {
         if (
@@ -190,6 +187,17 @@ class Link
         }
 
         return User::find($this->via_resource_id);
+    }
+
+    public function viaResource(): User|Collection|null
+    {
+        if ($this->via_type == 'user') {
+            return $this->viaUser();
+        } elseif ($this->via_type == 'collection') {
+            return $this->viaCollection();
+        } else {
+            return null;
+        }
     }
 
     /**

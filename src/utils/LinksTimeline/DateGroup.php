@@ -15,9 +15,33 @@ class DateGroup
     /** @var models\Link[] */
     public array $links = [];
 
+    /** @var array<string, ViaGroup> */
+    public array $via_groups = [];
+
     public function __construct(\DateTimeImmutable $date)
     {
         $this->date = $date;
+    }
+
+    public function addLink(models\Link $link): void
+    {
+        $this->links[] = $link;
+
+        if ($link->via_type) {
+            $via_key = $link->via_type . '#' . $link->via_resource_id;
+            if (isset($this->via_groups[$via_key])) {
+                $via_group = $this->via_groups[$via_key];
+            } else {
+                $via_resource = $link->viaResource();
+
+                assert($via_resource !== null);
+
+                $via_group = new ViaGroup($via_resource);
+                $this->via_groups[$via_key] = $via_group;
+            }
+
+            $via_group->addLink($link);
+        }
     }
 
     public function isToday(): bool

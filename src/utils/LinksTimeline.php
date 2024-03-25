@@ -33,7 +33,7 @@ class LinksTimeline
                 $this->dates_groups[$date_key] = $date_group;
             }
 
-            $date_group->links[] = $link;
+            $date_group->addLink($link);
         }
     }
 

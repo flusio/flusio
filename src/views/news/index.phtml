@@ -87,21 +87,31 @@
                 </details>
             </header>
 
-            <div class="cards">
-                <?php foreach ($date_group->links as $link): ?>
-                    <?= $this->include('links/_link.phtml', [
-                        'link' => $link,
-                        'from' => \Minz\Url::for('news'),
-                        'display_edit' => true,
-                        'display_repair' => true,
-                        'display_via' => true,
-                        'display_read_later' => true,
-                        'display_mark_as_read' => true,
-                        'display_never' => true,
-                        'storing_must_mark_as_read' => true,
-                    ]); ?>
-                <?php endforeach; ?>
-            </div>
+            <?php foreach ($date_group->via_groups as $via_group): ?>
+                <h3 class="title--small">
+                    <?= $via_group->title() ?>
+
+                    <small class="text--secondary">
+                        ⋅ <?= count($via_group->links) ?> liens
+                    </small>
+                </h3>
+
+                <div class="cards">
+                    <?php foreach ($via_group->links as $link): ?>
+                        <?= $this->include('links/_link.phtml', [
+                            'link' => $link,
+                            'from' => \Minz\Url::for('news'),
+                            'display_edit' => true,
+                            'display_repair' => true,
+                            'display_via' => false,
+                            'display_read_later' => true,
+                            'display_mark_as_read' => true,
+                            'display_never' => true,
+                            'storing_must_mark_as_read' => true,
+                        ]); ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
         </section>
     <?php endforeach; ?>
 <?php elseif ($beta_enabled): ?>
